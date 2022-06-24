@@ -1,0 +1,16 @@
+{
+    "eslint.nodeEnv": "",
+    "emmet.preferences": {
+
+    
+    },
+    "emmet.syntaxProfiles": {
+    
+    },
+    "emmet.optimizeStylesheetParsing": false,
+    
+    "emmet.includeLanguages": {
+           "javascript": "javascriptreact"
+        }
+     
+}
