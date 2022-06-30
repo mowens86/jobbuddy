@@ -44,6 +44,7 @@ const login = (req, res) => {
 }
 const updateUser = (req, res) => {
     // res.send('updateUser') /*Postman tester*/
+    
 }
 
 export { register, login, updateUser }

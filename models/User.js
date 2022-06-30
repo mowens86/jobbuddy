@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import validator from "validator";
-
-// Notes
-
-//1 Can only set-up with email by using indexing to make sure only unique emails are accepted, validator will be set-up separately
+import bcrypt from 'bcryptjs';
+/**
+ * Notes
+ * 1. Can only set-up with email by using indexing to make sure only unique emails are accepted, validator will be set-up separately
+ * 2. https://mongoosejs.com/docs/middleware.html pre section for more info. Basically, let's us do something before
+ * 3. Generate salt function first then hash the password and salt function. Both are async and creates extra characters. 10 is solid. The more characters the more secure, however it takes longer.
+ */
 
 const UserSchema = new mongoose.Schema({
     name: { 
@@ -20,7 +23,7 @@ const UserSchema = new mongoose.Schema({
             validator:validator.isEmail,
             message: 'Please provide a valid email'
         },
-        unique:true, //1 
+/*1*/    unique:true, 
     },
     password: { 
         type: String, 
@@ -40,6 +43,11 @@ const UserSchema = new mongoose.Schema({
         maxlength:20,
         default: 'my city',
     },   
+})
+
+/*2*/ UserSchema.pre('save', async function() {
+    /*3*/const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
 })
 
 export default mongoose.model('User', UserSchema)
