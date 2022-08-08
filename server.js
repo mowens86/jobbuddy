@@ -16,6 +16,7 @@ import errorHandlerMiddleware from './middleware/error-handler.js';
 
 
 app.use(express.json()); // Makes json data available in controllers
+console.log('hello');
 
 app.get('/', (req, res) => {
     res.send('Welcome!');
